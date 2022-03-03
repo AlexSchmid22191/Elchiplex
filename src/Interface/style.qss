@@ -1,0 +1,65 @@
+ElchMainWindow{background-color: #181C3F;}
+QLabel#Icon{background-color: #2A2D56;}
+
+/*Styling of the Status Bar*/
+ElchStatusBar{background-color: #2A2D56; color:#7b8ccb;}
+ElchStatusBar QLabel#label{color: #7b8ccb; font: 8pt "Roboto Light";}
+ElchStatusBar QLabel#value{color: #7b8ccb; font: 14pt "Roboto";}
+
+/*Styling of the Title Bar*/
+ElchTitlebar QToolButton#Close{background: url(Interface/Icons/Quit.png) center no-repeat; border:none;}
+ElchTitlebar QToolButton#Close:hover{background:url(Interface/Icons/Quit_Hover.png) center no-repeat ; border: none;}
+ElchTitlebar QToolButton#Minimize{background: url(Interface/Icons/Minimize.png) center no-repeat; border:none;}
+ElchTitlebar QToolButton#Minimize:hover{background: url(Interface/Icons/Minimize_Hover.png) center no-repeat ; border: none;}
+
+/*Styling of the Device Menu*/
+ElchDeviceMenu{background-color: #2A2D56;}
+QLabel{color: #7b8ccb; font: 11pt "Roboto Light";}
+QLabel#Header{font: 14pt "Roboto";}
+
+ElchRelayControl {background-color: #2A2D56;}
+
+/*Buttons*/
+QPushButton{background:#2A2D56; color:#7b8ccb; border:1px solid #15183b; padding: 2px; font: 11pt "Roboto Light";}
+QPushButton:hover{background: #373a62; color: #7b8ccb;}
+QPushButton:checked:hover{background: #373a62; color: #7b8ccb;}
+QPushButton:checked{background: #343760; color: #7b8ccb;}
+
+QPushButton#Refresh{icon: url(Interface/Icons/Refresh.png);}
+QPushButton#Refresh:hover{icon: url(Interface/Icons/Refresh_Glow.png);}
+QPushButton#Refresh:checked{icon: url(Interface/Icons/Refresh_Glow.png);}
+
+QPushButton#Connect{icon: url(Interface/Icons/Connect.png);}
+QPushButton#Connect:hover{icon: url(Interface/Icons/Connect_Glow.png);}
+QPushButton#Connect:checked{icon: url(Interface/Icons/Connect_Glow.png);}
+
+/*Comboboxes*/
+ElchDeviceMenu QComboBox{background-color:#2A2D56; border: 1px solid #15183b; color: #7b8ccb; font: 11pt "Roboto Light";}
+ElchDeviceMenu QComboBox:on{background-color: #252a4e; color: #7f8ab7;}
+ElchDeviceMenu QComboBox::drop-down{border:none;}
+ElchDeviceMenu QComboBox::down-arrow{image: url(Interface/Icons/Down.png); width: 10px;}
+ElchDeviceMenu QComboBox::down-arrow:on{image: url(Interface/Icons/Down_Glow.png); width: 10px;}
+ElchDeviceMenu QComboBox::down-arrow:hover{image: url(Interface/Icons/Down_Glow.png); width: 10px;}
+ElchDeviceMenu QToolTip{background-color: #2A2D56; color: #7b8ccb; font: 11pt "Roboto Light"; border: 1px solid #15183b;}
+
+ElchDeviceMenu QAbstractItemView {background-color: #2A2D56; border:1px solid #15183b; color: #7b8ccb;
+    selection-background-color: #393b67; outline: 0}
+
+/*Radiobuttons*/
+ElchMenuPages QRadioButton{color: #7b8ccb; font: 11pt "Roboto Light"}
+ElchMenuPages QRadioButton::indicator{width:15px; height: 15px}
+ElchMenuPages QRadioButton::indicator:unchecked{image: url(Icons/Radio_Off.png)}
+ElchMenuPages QRadioButton::indicator:unchecked:hover{image: url(Icons/Radio_Off_Glow.png)}
+ElchMenuPages QRadioButton::indicator:checked{image: url(Icons/Radio_On.png)}
+ElchMenuPages QRadioButton::indicator:checked:hover{image: url(Icons/Radio_On_Glow.png);}
+
+/*Checkboxes*/
+QCheckBox{color: #7b8ccb; font: 11pt "Roboto Light";}
+QCheckBox::indicator{width:15px; height: 15px;}
+QCheckBox::indicator:unchecked{image: url(Interface/Icons/Radio_Off.png);}
+QCheckBox::indicator:unchecked:hover{image: url(Interface/Icons/Radio_Off_Glow.png);}
+QCheckBox::indicator:checked{image: url(Interface/Icons/Radio_On.png);}
+QCheckBox::indicator:checked:hover{image: url(Interface/Icons/Radio_On_Glow.png);}
+
+/* Menu specific icons on buttons*/
+
