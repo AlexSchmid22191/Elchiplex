@@ -15,5 +15,5 @@ class EngineSignals(QObject):
     all_relays_state = Signal(dict)
 
 
-sig_engine = EngineSignals()
-sif_gui = GuiSignals()
+signals_engine = EngineSignals()
+signals_gui = GuiSignals()

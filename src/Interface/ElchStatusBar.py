@@ -7,7 +7,7 @@ class ElchStatusBar(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.label = QLabel('Test')
+        self.label = QLabel('Status')
 
         hbox = QHBoxLayout()
         hbox.addWidget(self.label)

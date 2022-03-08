@@ -33,7 +33,7 @@ class ElchMainWindow(QWidget):
         panel_spacing = 20
 
         vbox_inner = QVBoxLayout()
-        vbox_inner.addWidget(self.relaycontrol, stretch=1)
+        vbox_inner.addWidget(self.relaycontrol, stretch=0)
         vbox_inner.addWidget(self.statusbar, stretch=0)
         vbox_inner.setSpacing(panel_spacing)
         vbox_inner.setContentsMargins(panel_spacing, panel_spacing, panel_spacing, panel_spacing)

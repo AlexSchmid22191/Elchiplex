@@ -1,7 +1,7 @@
 from PySide2.QtCore import Qt, QTimer
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QCheckBox, QGridLayout, QPushButton, \
-    QGraphicsScene, QGraphicsView
+    QGraphicsScene, QGraphicsView, QApplication
 import functools
 
 
@@ -25,9 +25,9 @@ class ElchRelayControl(QWidget):
 
         button_box = QVBoxLayout()
         button_box.addStretch()
-        for button in self.preset_buttons.values():
+        for idx, button in self.preset_buttons.items():
             button_box.addWidget(button)
-            button.clicked.connect(lambda *args: print(args))
+            button.clicked.connect(functools.partial(self.preset_button_click, idx))
         button_box.addStretch()
 
         grid_box = QVBoxLayout()
@@ -44,3 +44,14 @@ class ElchRelayControl(QWidget):
     @staticmethod
     def checkbox_toogled(state: bool, relay: tuple):
         print(state, relay)
+
+    def preset_button_click(self, button):
+        modifiers = QApplication.keyboardModifiers()
+        print(button)
+        match modifiers:
+            case Qt.ShiftModifier:
+                print('shift')
+            case Qt.ControlModifier:
+                print('ctrl')
+            case _:
+                print('click')
