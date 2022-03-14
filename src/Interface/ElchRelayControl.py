@@ -1,13 +1,18 @@
-from PySide2.QtCore import Qt, QTimer
-from PySide2.QtGui import QPixmap
-from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QCheckBox, QGridLayout, QPushButton, \
-    QGraphicsScene, QGraphicsView, QApplication
 import functools
+
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel, QCheckBox, QGridLayout, QApplication
+
+from src.ComSignals import EngineSignals, GuiSignals
 
 
 class ElchRelayControl(QWidget):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, engine_signals: EngineSignals, gui_signals: GuiSignals, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.engine_signals = engine_signals
+        self.gui_signals = gui_signals
+
         self.setAttribute(Qt.WA_StyledBackground, True)
 
         self.toggle_buttons = {(row, col): QCheckBox() for row in range(1, 5) for col in range(1, 5)}
@@ -28,9 +33,9 @@ class ElchRelayControl(QWidget):
 
         self.setLayout(grid_box)
 
-    @staticmethod
-    def checkbox_toogled(state: bool, relay: tuple):
-        print(state, relay)
+    def checkbox_toogled(self, state: bool, relay: tuple):
+        self.gui_signals.toggle_single_relay.emit(relay, state)
+
 
     def preset_button_click(self, button):
         modifiers = QApplication.keyboardModifiers()

@@ -4,10 +4,16 @@ from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, \
     QApplication
 
+from src.ComSignals import EngineSignals, GuiSignals
+
 
 class ElchPresets(QWidget):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, engine_signals: EngineSignals, gui_signals: GuiSignals, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.engine_signals = engine_signals
+        self.gui_signals = gui_signals
+
         self.setAttribute(Qt.WA_StyledBackground, True)
 
         self.preset_buttons = {i: QPushButton(f'Preset {i}') for i in range(1, 5)}

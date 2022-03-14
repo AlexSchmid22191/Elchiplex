@@ -1,19 +1,21 @@
-import os
-
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QFontDatabase, QPixmap
-from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSizeGrip, QLabel
+from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
+from src.ComSignals import EngineSignals, GuiSignals
 from src.Interface.ElchDeviceMenu import ElchDeviceMenu
-from src.Interface.ElchTitleBar import ElchTitlebar
-from src.Interface.ElchStatusBar import ElchStatusBar
-from src.Interface.ElchRelayControl import ElchRelayControl
 from src.Interface.ElchPresets import ElchPresets
+from src.Interface.ElchRelayControl import ElchRelayControl
+from src.Interface.ElchStatusBar import ElchStatusBar
+from src.Interface.ElchTitleBar import ElchTitlebar
 
 
 class ElchMainWindow(QWidget):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, engine_signals: EngineSignals, gui_signals: GuiSignals, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.engine_signals = engine_signals
+        self.gui_signals = gui_signals
 
         self.setWindowFlags(Qt.FramelessWindowHint)
 
@@ -23,11 +25,11 @@ class ElchMainWindow(QWidget):
         with open('Interface/style.qss') as stylefile:
             self.setStyleSheet(stylefile.read())
 
-        self.device_menu = ElchDeviceMenu()
+        self.device_menu = ElchDeviceMenu(engine_signals, gui_signals)
         self.titlebar = ElchTitlebar()
-        self.statusbar = ElchStatusBar()
-        self.relaycontrol = ElchRelayControl()
-        self.presets = ElchPresets()
+        self.statusbar = ElchStatusBar(engine_signals)
+        self.relaycontrol = ElchRelayControl(engine_signals, gui_signals)
+        self.presets = ElchPresets(engine_signals, gui_signals)
 
         elchicon = QLabel(objectName='Icon')
         elchicon.setPixmap(QPixmap('Interface/Icons/ElchiHead.png'))
@@ -61,4 +63,5 @@ class ElchMainWindow(QWidget):
         hbox_outer.setSpacing(0)
 
         self.setLayout(hbox_outer)
+
         self.show()
