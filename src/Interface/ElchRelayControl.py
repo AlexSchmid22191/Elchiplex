@@ -11,7 +11,6 @@ class ElchRelayControl(QWidget):
         self.setAttribute(Qt.WA_StyledBackground, True)
 
         self.toggle_buttons = {(row, col): QCheckBox() for row in range(1, 5) for col in range(1, 5)}
-        self.preset_buttons = {i: QPushButton(f'Preset {i}') for i in range(1, 5)}
 
         grid = QGridLayout()
         for idx in range(1, 5):
@@ -23,23 +22,11 @@ class ElchRelayControl(QWidget):
         grid.addWidget(QLabel('A', objectName='Header', alignment=Qt.AlignCenter), 0, 2, 1, 4)
         grid.addWidget(QLabel('B', objectName='Header', alignment=Qt.AlignCenter), 2, 0, 4, 1)
 
-        button_box = QVBoxLayout()
-        button_box.addStretch()
-        for idx, button in self.preset_buttons.items():
-            button_box.addWidget(button)
-            button.clicked.connect(functools.partial(self.preset_button_click, idx))
-        button_box.addStretch()
-
         grid_box = QVBoxLayout()
         grid_box.addLayout(grid)
         grid_box.addStretch()
 
-        hbox = QHBoxLayout()
-        hbox.addLayout(grid_box)
-        hbox.addSpacing(20)
-        hbox.addLayout(button_box)
-
-        self.setLayout(hbox)
+        self.setLayout(grid_box)
 
     @staticmethod
     def checkbox_toogled(state: bool, relay: tuple):

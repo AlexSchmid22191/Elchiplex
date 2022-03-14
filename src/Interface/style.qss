@@ -1,5 +1,7 @@
 ElchMainWindow{background-color: #181C3F;}
 QLabel#Icon{background-color: #2A2D56;}
+QToolTip {background-color: #2A2D56; border:1px solid #15183b; color: #7b8ccb;
+    selection-background-color: #393b67; outline: 0}
 
 /*Styling of the Status Bar*/
 ElchStatusBar{background-color: #2A2D56; color:#7b8ccb;}
@@ -18,6 +20,7 @@ QLabel{color: #7b8ccb; font: 11pt "Roboto Light";}
 QLabel#Header{font: 14pt "Roboto";}
 
 ElchRelayControl {background-color: #2A2D56;}
+ElchPresets {background-color: #2A2D56;}
 
 /*Buttons*/
 QPushButton{background:#2A2D56; color:#7b8ccb; border:1px solid #15183b; padding: 2px; font: 11pt "Roboto Light";}

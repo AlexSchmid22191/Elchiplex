@@ -8,6 +8,7 @@ from src.Interface.ElchDeviceMenu import ElchDeviceMenu
 from src.Interface.ElchTitleBar import ElchTitlebar
 from src.Interface.ElchStatusBar import ElchStatusBar
 from src.Interface.ElchRelayControl import ElchRelayControl
+from src.Interface.ElchPresets import ElchPresets
 
 
 class ElchMainWindow(QWidget):
@@ -26,14 +27,19 @@ class ElchMainWindow(QWidget):
         self.titlebar = ElchTitlebar()
         self.statusbar = ElchStatusBar()
         self.relaycontrol = ElchRelayControl()
+        self.presets = ElchPresets()
 
         elchicon = QLabel(objectName='Icon')
         elchicon.setPixmap(QPixmap('Interface/Icons/ElchiHead.png'))
 
         panel_spacing = 20
 
+        hbox_inner = QHBoxLayout()
+        hbox_inner.addWidget(self.relaycontrol, stretch=0)
+        hbox_inner.addWidget(self.presets, stretch=0)
+
         vbox_inner = QVBoxLayout()
-        vbox_inner.addWidget(self.relaycontrol, stretch=0)
+        vbox_inner.addLayout(hbox_inner)
         vbox_inner.addWidget(self.statusbar, stretch=0)
         vbox_inner.setSpacing(panel_spacing)
         vbox_inner.setContentsMargins(panel_spacing, panel_spacing, panel_spacing, panel_spacing)
