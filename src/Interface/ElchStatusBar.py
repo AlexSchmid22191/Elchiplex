@@ -9,7 +9,7 @@ class ElchStatusBar(QWidget):
 
         self.engine_signals = engine_signals
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.label = QLabel('Status')
+        self.label = QLabel('')
 
         self.engine_signals.single_relay_state.connect(self.display_relay_activity)
         self.engine_signals.device_connected.connect(self.display_device_connected)

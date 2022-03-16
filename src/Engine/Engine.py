@@ -7,7 +7,7 @@ import serial.tools.list_ports
 from src.ComSignals import EngineSignals, GuiSignals
 from src.Driver.Omniplex import Omniplex
 from src.Engine.QThread import Worker
-from PySide2.QtCore import QThreadPool
+from PySide2.QtCore import QThreadPool, QTimer
 
 
 class ElchiplexEngine:
@@ -25,6 +25,9 @@ class ElchiplexEngine:
             self.presets = self._create_empty_presets()
             self._save_presets()
 
+        self.timer = QTimer()
+        self.timer.start(1000)
+
         self.gui_signals.connect_device.connect(self.connect_device)
         self.gui_signals.disconnect_device.connect(self.disconnect_device)
         self.gui_signals.request_ports.connect(self.refresh_available_ports)
@@ -35,15 +38,15 @@ class ElchiplexEngine:
         self.device = Omniplex(port)
         time.sleep(2)
         self.engine_signals.device_connected.emit(port)
-
         self.gui_signals.toggle_single_relay.connect(self.set_single_relay)
+        self.timer.timeout.connect(self.get_relay_states)
 
     def disconnect_device(self):
         self.device.serial.close()
         self.device = None
         self.engine_signals.device_disconnectd.emit()
-
         self.gui_signals.toggle_single_relay.disconnect(self.set_single_relay)
+        self.timer.timeout.disconnect(self.get_relay_states)
 
     def refresh_available_ports(self):
         self.available_ports = {port[0]: port[1] for port in serial.tools.list_ports.comports()}
@@ -51,6 +54,12 @@ class ElchiplexEngine:
 
     def set_single_relay(self, relay: tuple, state: bool) -> None:
         worker = Worker(functools.partial(self.device.set_single_relay, relay, state))
+        worker.signals.success.connect(functools.partial(self.engine_signals.single_relay_state.emit, relay, state))
+        self.pool.start(worker)
+
+    def get_relay_states(self):
+        worker = Worker(self.device.read_all_relays)
+        worker.signals.result.connect(self.engine_signals.all_relays_state.emit)
         self.pool.start(worker)
 
     def _load_presets(self):
