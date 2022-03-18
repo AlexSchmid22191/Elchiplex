@@ -31,11 +31,8 @@ class ElchPresets(QWidget):
 
     def preset_button_click(self, button):
         modifiers = QApplication.keyboardModifiers()
-        print(button)
         match modifiers:
             case Qt.ShiftModifier:
-                print('shift')
-            case Qt.ControlModifier:
-                print('ctrl')
+                self.gui_signals.save_preset.emit(button)
             case _:
-                print('click')
+                self.gui_signals.load_preset.emit(button)

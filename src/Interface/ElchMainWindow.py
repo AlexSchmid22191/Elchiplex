@@ -26,7 +26,7 @@ class ElchMainWindow(QWidget):
             self.setStyleSheet(stylefile.read())
 
         self.device_menu = ElchDeviceMenu(engine_signals, gui_signals)
-        self.titlebar = ElchTitlebar()
+        self.titlebar = ElchTitlebar(gui_signals)
         self.statusbar = ElchStatusBar(engine_signals)
         self.relaycontrol = ElchRelayControl(engine_signals, gui_signals)
         self.presets = ElchPresets(engine_signals, gui_signals)

@@ -26,7 +26,7 @@ class Omniplex(minimalmodbus.Instrument):
     def read_all_relays(self) -> dict:
         with QMutexLocker(self.com_mutex):
             states = self.read_bits(0, 16, functioncode=1)
-            return {self._address_to_relay(address): states[address] for address in range(16)}
+            return {self._address_to_relay(address): bool(states[address]) for address in range(16)}
 
     @staticmethod
     def _address_to_relay(adress: int) -> tuple:

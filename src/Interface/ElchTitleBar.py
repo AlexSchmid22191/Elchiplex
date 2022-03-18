@@ -1,10 +1,13 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QHBoxLayout, QToolButton
+from src.ComSignals import GuiSignals
 
 
 class ElchTitlebar(QWidget):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, gui_signals: GuiSignals, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.gui_signals = gui_signals
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setMinimumHeight(50)
@@ -41,4 +44,5 @@ class ElchTitlebar(QWidget):
         self.parent().showMinimized()
 
     def close(self):
+        self.gui_signals.save_presets_to_disk.emit()
         self.parent().close()

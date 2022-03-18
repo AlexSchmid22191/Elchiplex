@@ -43,5 +43,3 @@ class ElchRelayControl(QWidget):
             checkbox.setChecked(states[(row, col)])
             checkbox.blockSignals(False)
 
-        print(states)
-
